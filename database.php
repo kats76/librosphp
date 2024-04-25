@@ -1,9 +1,9 @@
 <?php
 class Database {
     private $host = "localhost";
-    private $username = "juan";
-    private $password = "juan1129";
-    private $dbname = "libros";
+    private $username = "test";
+    private $password = "test";
+    private $dbname = "test";
 
     public function getConnection() {
         $conn = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->username, $this->password);

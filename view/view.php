@@ -1,110 +1,99 @@
-<!-- view.php -->
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Lista de Libros</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh; /* Establecer la altura mínima de la ventana gráfica */
-        }
-        header {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-        }
-        section {
-            margin: 15px;
-            padding: 20px;
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            flex: 1; /* Hacer que el section ocupe todo el espacio disponible */
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            width: 100%;
-            flex-shrink: 0; /* Evitar que el footer se encoja */
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #007bff;
-            color: white;
-        }
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-        .add-icon {
-            width: 30px;
-            text-align: center;
-        }
-        /* Estilos para los botones */
-        .add-icon button {
-            padding: 6px 10px;
-            border: none;
-            border-radius: 3px;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-        }
-        /* Estilos para los botones al pasar el ratón */
-        .add-icon button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel="stylesheet" href="../view/styles.css"> <!-- Enlazar el archivo de estilos CSS -->
 </head>
 <body>
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+
+    <form id="addForm" action="controller.php" method="POST" class="form">
+      <div class="form-group">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo">
+      </div>
+      <div class="form-group">
+        <label for="autor">Autor:</label>
+        <input type="text" id="autor" name="autor">
+      </div>
+      <div class="form-group">
+        <label for="publicacion">Publicación:</label>
+        <input type="date" id="publicacion" name="publicacion">
+      </div>
+      <button type="submit">Enviar</button>
+    </form>
+
+  </div>
+</div>
     <header>
         <h1>Lista de Libros</h1>
     </header>
+
     <section>
-        <table>
+      <table>
+        <!-- Encabezados de la tabla -->
+        <tr>
+          <th>Título</th>
+          <th>Autor</th>
+          <th>Publicación</th>
+          <th class="add-icon">
+            <button id="openModalButton">+</button>
+          </th>
+        </tr>
+
+        <!-- Filas de la tabla -->
+        <?php foreach ($libros as $libro): ?>
             <tr>
-                <th>Id</th>
-                <th>Título</th>
-                <th>Autor</th>
-                <th>Publicación</th>
-                <th class="add-icon">
-                    <button>+</button> <!-- Botón con el icono de más para agregar -->
-                </th> 
+                <!-- Celdas con la información de cada libro -->
+                <td><?php echo $libro->getTitulo(); ?></td>
+                <td><?php echo $libro->getAutor(); ?></td>
+                <td><?php echo $libro->getPublicacion(); ?></td>
+                <!-- Botones de acciones (editar, eliminar) -->
+                <td class="actions">
+                    <button>Editar</button> <!-- Botón para editar -->
+                    <button>Eliminar</button> <!-- Botón para eliminar -->
+                </td>
             </tr>
-            <?php foreach ($libros as $libro): ?>
-                <tr>
-                    <td><?php echo $libro->getId(); ?></td>
-                    <td><?php echo $libro->getTitulo(); ?></td>
-                    <td><?php echo $libro->getAutor(); ?></td>
-                    <td><?php echo $libro->getPublicacion(); ?></td>
-                    <td class="actions">
-                        <button>Editar</button> <!-- Botón para editar -->
-                        <button>Eliminar</button> <!-- Botón para eliminar -->
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
+        <?php endforeach; ?>
+      </table>
+
+</section>
+
+
     </section>
     <footer>
         <p>Derechos de autor © 2024 Prueba PHP</p>
     </footer>
 </body>
+<script>
+    // Obtener referencia al botón de abrir modal y al modal
+    const openModalButton = document.getElementById('openModalButton');
+    const modal = document.getElementById('myModal');
+
+    // Obtener referencia al botón de cierre del modal
+    const closeButton = document.getElementsByClassName('close')[0];
+
+    // Manejar el clic en el botón de abrir modal
+    openModalButton.addEventListener('click', function() {
+        modal.style.display = 'block'; // Mostrar el modal
+    });
+
+    // Manejar el clic en el botón de cierre del modal
+    closeButton.addEventListener('click', function() {
+        modal.style.display = 'none'; // Ocultar el modal
+    });
+
+    // Manejar el clic fuera del formulario para cerrar el modal
+    window.addEventListener('click', function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none'; // Ocultar el modal
+        }
+    });
+</script>
+
+
 </html>
 

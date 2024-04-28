@@ -5,7 +5,7 @@ class Libro {
     private $autor;
     private $publicacion;
 
-    public function __construct($id_libro, $titulo, $autor, $publicacion) {
+    public function __construct($id = null,$titulo, $autor, $publicacion) {
         $this->id_libro = $id_libro;
         $this->titulo = $titulo;
         $this->autor = $autor;

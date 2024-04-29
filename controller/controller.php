@@ -18,7 +18,7 @@ class LibroController {
             }
             
             // Crear un nuevo libro con los datos recibidos
-            $libro = new Libro($titulo, $autor, $publicacion);
+            $libro = new Libro($id_libro = null,$titulo, $autor, $publicacion);
             
             // Instanciar el modelo y llamar al método para agregar el libro
             $model = new libroModel();

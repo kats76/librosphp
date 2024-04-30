@@ -55,6 +55,7 @@
                 <td class="actions">
                     <button>Editar</button> <!-- Botón para editar -->
                     <button>Editar</button> <!-- Botón para editar -->
+                     <!-- Revisar Ajax -->
                     <form method="POST" action="controller.php?action=delete">
                         <input type="hidden" name="id_libro" value="<?php echo $libro->getId(); ?>">
                         <input type="submit" value="Eliminar">

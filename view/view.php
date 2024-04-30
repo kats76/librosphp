@@ -54,7 +54,11 @@
                 <!-- Botones de acciones (editar, eliminar) -->
                 <td class="actions">
                     <button>Editar</button> <!-- Botón para editar -->
-                    <button>Eliminar</button> <!-- Botón para eliminar -->
+                    <button>Editar</button> <!-- Botón para editar -->
+                    <form method="POST" action="controller.php?action=delete">
+                        <input type="hidden" name="id_libro" value="<?php echo $libro->getId(); ?>">
+                        <input type="submit" value="Eliminar">
+                    </form>
                 </td>
             </tr>
         <?php endforeach; ?>

@@ -35,13 +35,13 @@ class LibroModel {
     
       $stmt->execute();
     }
-    public function deleteBook($id_libr) {
+    public function deleteBook($id_libro) {
       $db = new Database();
       $conn = $db->getConnection();
 
       $stmt = $conn->prepare("DELETE FROM libros WHERE id_libros=:id_libro;");
       $stmt->bindParam(':id_libro', $libro->getId());
-    
+        
       $stmt->execute();
     }
 }
